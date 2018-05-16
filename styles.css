@@ -1,0 +1,32 @@
+body {
+  padding-top: 3rem;
+  background: #f7f7f7;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  transition: all 0.2s ease-in-out;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+h2 {
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
+hr {
+  margin: 10px 0;
+}
+
+button {
+  text-transform: uppercase;
+}
+
+.list-group {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

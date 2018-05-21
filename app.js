@@ -7,55 +7,91 @@ const filter = document.querySelector('#filter')
 const clearBtn = document.querySelector('#clear-btn')
 const removeTaskBtn = document.querySelector('.remove-task')
 
-// Captures the task input by the user
-const taskInput = (e) => {
-  // Prevent form submitting
-  e.preventDefault()
-  // Alert user to enter a task if input field is blank on submit
-  if (task.value === '') {
-    alert('Add a task')
-  } else {
-    // Create the list item and the remove button
+// Load Local Storage
+const loadTasksFromLocalStorage = () => {
+  let tasks = JSON.parse(localStorage.getItem('tasks'))
+
+  tasks.map(task => {
     const taskToAdd = document.createElement('li')
     const removeButton = document.createElement('a')
-    // Add the classes and attributes to the list item and remove button
+
     taskToAdd.classList.add('list-group-item', 'justify-content-between', 'align-items-center')
     removeButton.classList.add('fas', 'fa-times', 'remove-task')
     removeButton.href = '#'
-    // Add the task text to list item
-    taskToAdd.appendChild(document.createTextNode(task.value))
-    // Add remove button to list item
+
+    taskToAdd.appendChild(document.createTextNode(task))
+
     taskToAdd.appendChild(removeButton)
-    // Append new task to the task list
+
     taskList.appendChild(taskToAdd)
-    // Clear the input field
-    task.value = ''
+
+    task.value = '' // Clears the input task input field
+  })
+}
+
+// Load tasks from LocalStorage
+loadTasksFromLocalStorage()
+
+// LocalStorage default task data
+let taskData = JSON.parse(localStorage.getItem('tasks')) || []
+
+// Captures the task input by the user
+const taskInput = (e) => {
+  e.preventDefault()
+
+  if (task.value === '') {
+    alert('Add a task') // Alert user to enter a task if input field is blank on submit
+  } else {
+    const taskToAdd = document.createElement('li')
+    const removeButton = document.createElement('a')
+
+    taskToAdd.classList.add('list-group-item', 'justify-content-between', 'align-items-center')
+    removeButton.classList.add('fas', 'fa-times', 'remove-task')
+    removeButton.href = '#'
+
+    taskToAdd.appendChild(document.createTextNode(task.value))
+
+    taskToAdd.appendChild(removeButton)
+
+    taskList.appendChild(taskToAdd)
+
+    taskData.push(taskToAdd.textContent)
+
+    setTasksToLocalStorage(taskData)
+
+    task.value = '' // Clears the input task input field
   }
+}
+
+// Set Local Storage
+const setTasksToLocalStorage = (task) => {
+  localStorage.setItem('tasks', JSON.stringify(task))
 }
 
 // Removes a task
 const removeTask = (e) => {
-  // Gets the task that was clicked and removes it
   if (e.target.classList.contains('remove-task')) {
     const taskToRemove = e.target.parentElement
+    const index = taskData.indexOf(taskToRemove.textContent)
     taskToRemove.remove()
+    taskData.splice(index, 1)
+    setTasksToLocalStorage(taskData)
   }
 }
 
 // Clears the task list
 const clearList = () => {
-  // Loops through task list and removes each task until the list is blank
   while (taskList.hasChildNodes()) {
     taskList.removeChild(taskList.lastChild);
   }
+  taskData = []
+  setTasksToLocalStorage(taskData)
 }
 
 // Filters tasks
 const filterTasks = () => {
-  // access the current tasks in the list
   const taskItems = document.querySelectorAll('.task-list li')
 
-  // Loop through tasks and hide the ones that do not include the filter input
   taskItems.forEach(task => {
     const filterInput = filter.value.toLowerCase().trim()
     !task.textContent.toLowerCase().includes(filterInput) && filter.value !== ''

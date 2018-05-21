@@ -11,6 +11,8 @@ const removeTaskBtn = document.querySelector('.remove-task')
 const loadTasksFromLocalStorage = () => {
   let tasks = JSON.parse(localStorage.getItem('tasks'))
 
+  if (tasks === null) return // Prevents function from running if nothing to load from Local Storage
+
   tasks.map(task => {
     const taskToAdd = document.createElement('li')
     const removeButton = document.createElement('a')

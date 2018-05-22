@@ -15,4 +15,4 @@ All data added also utilises the Local Storage within your browser
   - CSS (Bootstrap 4)
   - Javascript
 
-[CodePen Link](https://codepen.io/GhostNote90/pen/LmapyV)
+[CodePen Link](https://codepen.io/GhostNote90/full/LmapyV/)

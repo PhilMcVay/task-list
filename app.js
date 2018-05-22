@@ -17,8 +17,16 @@ const loadTasksFromLocalStorage = () => {
     const taskToAdd = document.createElement('li')
     const removeButton = document.createElement('a')
 
-    taskToAdd.classList.add('list-group-item', 'justify-content-between', 'align-items-center')
-    removeButton.classList.add('fas', 'fa-times', 'remove-task')
+    taskToAdd.classList.add(
+      'list-group-item',
+      'justify-content-between',
+      'align-items-center'
+    )
+    removeButton.classList.add(
+      'fas',
+      'fa-times',
+      'remove-task'
+    )
     removeButton.href = '#'
 
     taskToAdd.appendChild(document.createTextNode(task))
@@ -47,8 +55,16 @@ const taskInput = (e) => {
     const taskToAdd = document.createElement('li')
     const removeButton = document.createElement('a')
 
-    taskToAdd.classList.add('list-group-item', 'justify-content-between', 'align-items-center')
-    removeButton.classList.add('fas', 'fa-times', 'remove-task')
+    taskToAdd.classList.add(
+      'list-group-item',
+      'justify-content-between',
+      'align-items-center'
+    )
+    removeButton.classList.add(
+      'fas',
+      'fa-times',
+      'remove-task'
+    )
     removeButton.href = '#'
 
     taskToAdd.appendChild(document.createTextNode(task.value))
